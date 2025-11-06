@@ -33,7 +33,7 @@ def get_data_dir():
 
 def download_cammesa_data(region_id, region_name, **kwargs):
     """
-    Descarga datos históricos de CAMMESA para una región (últimos 60 días)
+    Descarga datos históricos de CAMMESA para una región (últimos 247 días)
     usando el endpoint 'ObtieneDemandaYTemperaturaRegionByFecha'.
     """
     ti = kwargs['ti']
@@ -41,7 +41,7 @@ def download_cammesa_data(region_id, region_name, **kwargs):
 
     # Fecha final = día de ejecución, fecha inicial = 60 días antes
     fecha_fin = execution_date.date()
-    fecha_inicio = fecha_fin - timedelta(days=60)
+    fecha_inicio = fecha_fin - timedelta(days=247)
 
     data_dir = get_data_dir()
     out_csv = f"{data_dir}/cammesa_data_{region_name}_{fecha_inicio.strftime('%Y%m%d')}_{fecha_fin.strftime('%Y%m%d')}.csv"
@@ -102,7 +102,7 @@ def download_cammesa_data(region_id, region_name, **kwargs):
 
 def extract_weather_data(region_name, latitude, longitude, **kwargs):
     """
-    Extrae datos climáticos históricos de Open-Meteo (últimos 60 días)
+    Extrae datos climáticos históricos de Open-Meteo (últimos 247 días)
     para una región específica, usando la API de archive.
     """
     ti = kwargs['ti']
@@ -110,7 +110,7 @@ def extract_weather_data(region_name, latitude, longitude, **kwargs):
 
     # Fechas de rango (últimos 60 días hasta la fecha de ejecución)
     fecha_fin = execution_date.date()
-    fecha_inicio = fecha_fin - timedelta(days=60)
+    fecha_inicio = fecha_fin - timedelta(days=247)
 
     argentina_tz = timezone('America/Argentina/Buenos_Aires')
 
